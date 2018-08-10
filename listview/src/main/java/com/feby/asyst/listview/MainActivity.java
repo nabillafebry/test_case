@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.feby.asyst.listview.adapter.PersonAdapter;
 import com.feby.asyst.listview.fragment.EditFragment;
+import com.feby.asyst.listview.model.Person;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView listView;
     ArrayList<String> listNama = new ArrayList<String>();
     ArrayAdapter arrayAdapter;
+    ArrayList<Person> listPerson = new ArrayList<>();
     EditText etInputName;
     Button btnAdd;
 
@@ -36,12 +39,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listNama.add("Ana");
         listNama.add("Rian");
 
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listNama);
-        listView.setAdapter(arrayAdapter);
+        for (int i = 0; i < 10; i++) {
+            Person person = new Person("Nama Ke " + i, "Alamat Ke" + i);
+            listPerson.add(person);
+        }
+
+//        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listNama);
+        PersonAdapter personAdapter = new PersonAdapter(this, listPerson);
+
+        listView.setAdapter(personAdapter);
 
 //        listView.setOnItemClickListener(this);
-        btnAdd.setOnClickListener(this);
-        listView.setOnItemLongClickListener(this);
+//        btnAdd.setOnClickListener(this);
+//        listView.setOnItemLongClickListener(this);
     }
 
 //    @Override
